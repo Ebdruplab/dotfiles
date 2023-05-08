@@ -319,3 +319,4 @@ function Create-Credentials {
 Write-host "Loaded: Create-Credentials"
 
 
+Clear-Host
