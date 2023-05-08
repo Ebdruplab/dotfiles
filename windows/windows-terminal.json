@@ -1,116 +1,144 @@
 {
-  "$help": "https://aka.ms/terminal-documentation",
-  "$schema": "https://aka.ms/terminal-profiles-schema",
-  "actions": [],
-  "defaultProfile": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
-  "firstWindowPreference": "defaultProfile",
-  "profiles": 
-  {
-      "defaults": 
-      {
-          "colorScheme": "SMYCK",
-          "cursorShape": "filledBox",
-          "font": 
-          {
-              "face": "Hack Nerd Font",
-              "size": 14
-          },
-          "historySize": 12000,
-          "intenseTextStyle": "bright",
-          "opacity": 95,
-          "padding": "8",
-          "scrollbarState": "visible",
-          "useAcrylic": false
-      },
-      "list": 
-      [
-          {
-              "commandline": "C:\\Program Files\\PowerShell\\7\\pwsh.exe --NoLogo",
-              "elevate": false,
-              "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
-              "hidden": false,
-              "icon": "%userprofile%\\WindowsTerminalIcons\\ps.png",
-              "name": "PowerShell",
-              "source": "Windows.Terminal.PowershellCore"
-          },
-          {
-              "guid": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
-              "hidden": false,
-              "icon": "%userprofile%\\WindowsTerminalIcons\\ubuntu.png",
-              "name": "Ubuntu Linux",
-              "source": "Windows.Terminal.Wsl",
-              "startingDirectory": "\\\\wsl$\\Ubuntu-20.04\\home\\xcad"
-          },
-          {
-              "guid": "{46ca431a-3a87-5fb3-83cd-11ececc031d2}",
-              "hidden": false,
-              "icon": "%userprofile%\\WindowsTerminalIcons\\kali.png",
-              "name": "Kali Linux",
-              "source": "Windows.Terminal.Wsl",
-              "startingDirectory": "\\\\wsl.localhost\\kali-linux\\home\\xcad"
-          },
-          {
-              "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
-              "icon": "%userprofile%\\WindowsTerminalIcons\\cmd.png",
-              "name": "Commandline"
-          },
-          {
-              "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
-              "hidden": true,
-              "icon": "%userprofile%\\WindowsTerminalIcons\\azure.png",
-              "name": "Azure Cloud Shell",
-              "source": "Windows.Terminal.Azure"
-          }
-      ]
-  },
-  "schemes": 
-  [
-      {
-          "background": "#1A1A1A",
-          "black": "#121212",
-          "blue": "#2B4FFF",
-          "brightBlack": "#666666",
-          "brightBlue": "#5C78FF",
-          "brightCyan": "#5AC8FF",
-          "brightGreen": "#905AFF",
-          "brightPurple": "#5EA2FF",
-          "brightRed": "#BA5AFF",
-          "brightWhite": "#FFFFFF",
-          "brightYellow": "#685AFF",
-          "cursorColor": "#FFFFFF",
-          "cyan": "#28B9FF",
-          "foreground": "#F1F1F1",
-          "green": "#7129FF",
-          "name": "xcad",
-          "purple": "#2883FF",
-          "red": "#A52AFF",
-          "selectionBackground": "#FFFFFF",
-          "white": "#F1F1F1",
-          "yellow": "#3D2AFF"
-      },
-      {
-        "background": "#1B1B1B",
-        "black": "#000000",
-        "blue": "#4E90A7",
-        "brightBlack": "#5D5D5D",
-        "brightBlue": "#9CD9F0",
-        "brightCyan" : "#77DFD8",
-        "brightGreen" : "#CDEE69",
-        "brightPurple" : "#FBB1F9",
-        "brightRed" : "#E09690",
-        "brightWhite" : "#F7F7F7",
-        "brightYellow" : "#FFE377",
-        "cyan" : "#218693",
-        "foreground" : "#F8F8F8",
-        "green" : "#8EB33B",
-        "name" : "SMYCK",
-        "purple" : "#C8A0D1",
-        "red" : "#C75646",
-        "white" : "#B0B0B0",
-        "yellow" : "#D0B03C"
-    }
-  ],
-  "showTabsInTitlebar": true,
-  "tabSwitcherMode": "inOrder",
-  "useAcrylicInTabRow": true
+    "$help": "https://aka.ms/terminal-documentation",
+    "$schema": "https://aka.ms/terminal-profiles-schema",
+    "actions": [
+        {
+            "command": "paste",
+            "keys": "ctrl+v"
+        },
+        {
+            "command": {
+                "action": "copy",
+                "singleLine": false
+            },
+            "keys": "ctrl+c"
+        },
+        {
+            "command": "find",
+            "keys": "ctrl+shift+f"
+        },
+        {
+            "command": {
+                "action": "splitPane",
+                "split": "auto",
+                "splitMode": "duplicate"
+            },
+            "keys": "alt+shift+d"
+        }
+    ],
+    "defaultProfile": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
+    "firstWindowPreference": "defaultProfile",
+    "profiles": {
+        "defaults": {
+            "colorScheme": "SMYCK",
+            "cursorShape": "filledBox",
+            "font": {
+                "face": "Hack Nerd Font",
+                "size": 14
+            },
+            "historySize": 12000,
+            "intenseTextStyle": "bright",
+            "opacity": 95,
+            "padding": "8",
+            "scrollbarState": "visible",
+            "useAcrylic": false
+        },
+        "list": [
+            {
+                "commandline": "C:\\Program Files\\PowerShell\\7\\pwsh.exe --NoLogo",
+                "elevate": false,
+                "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
+                "hidden": false,
+                "icon": "%userprofile%\\WindowsTerminalIcons\\ps.png",
+                "name": "PowerShell",
+                "source": "Windows.Terminal.PowershellCore"
+            },
+            {
+                "guid": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
+                "hidden": false,
+                "icon": "%userprofile%\\WindowsTerminalIcons\\ubuntu.png",
+                "name": "Ubuntu Linux",
+                "source": "Windows.Terminal.Wsl",
+                "startingDirectory": "\\\\wsl$\\Ubuntu-20.04\\home\\kristian"
+            },
+            {
+                "guid": "{4dd1e689-b517-5f39-947d-78e8a8bdf958}",
+                "hidden": false,
+                "name": "Ubuntu Linux01",
+                "source": "CanonicalGroupLimited.Ubuntu20.04LTS_79rhkp1fndgsc"
+            },
+        ]
+    },
+    "schemes": [
+        {
+            "background": "#1A1A1A",
+            "black": "#121212",
+            "blue": "#2B4FFF",
+            "brightBlack": "#666666",
+            "brightBlue": "#5C78FF",
+            "brightCyan": "#5AC8FF",
+            "brightGreen": "#905AFF",
+            "brightPurple": "#5EA2FF",
+            "brightRed": "#BA5AFF",
+            "brightWhite": "#FFFFFF",
+            "brightYellow": "#685AFF",
+            "cursorColor": "#FFFFFF",
+            "cyan": "#28B9FF",
+            "foreground": "#F1F1F1",
+            "green": "#7129FF",
+            "name": "xcad",
+            "purple": "#2883FF",
+            "red": "#A52AFF",
+            "selectionBackground": "#FFFFFF",
+            "white": "#F1F1F1",
+            "yellow": "#3D2AFF"
+        },
+        {
+            "background": "#282A36",
+            "black": "#21222C",
+            "blue": "#BD93F9",
+            "brightBlack": "#6272A4",
+            "brightBlue": "#D6ACFF",
+            "brightCyan": "#A4FFFF",
+            "brightGreen": "#69FF94",
+            "brightPurple": "#FF92DF",
+            "brightRed": "#FF6E6E",
+            "brightWhite": "#FFFFFF",
+            "brightYellow": "#FFFFA5",
+            "cursorColor": "#F8F8F2",
+            "cyan": "#8BE9FD",
+            "foreground": "#F8F8F2",
+            "green": "#50FA7B",
+            "name": "Dracula",
+            "purple": "#FF79C6",
+            "red": "#FF5555",
+            "selectionBackground": "#44475A",
+            "white": "#F8F8F2",
+            "yellow": "#F1FA8C"
+        },
+        {
+            "background": "#1B1B1B",
+            "black": "#000000",
+            "blue": "#4E90A7",
+            "brightBlack": "#5D5D5D",
+            "brightBlue": "#9CD9F0",
+            "brightCyan": "#77DFD8",
+            "brightGreen": "#CDEE69",
+            "brightPurple": "#FBB1F9",
+            "brightRed": "#E09690",
+            "brightWhite": "#F7F7F7",
+            "brightYellow": "#FFE377",
+            "cyan": "#218693",
+            "foreground": "#F8F8F8",
+            "green": "#8EB33B",
+            "name": "SMYCK",
+            "purple": "#C8A0D1",
+            "red": "#C75646",
+            "white": "#B0B0B0",
+            "yellow": "#D0B03C"
+        }
+    ],
+    "showTabsInTitlebar": true,
+    "tabSwitcherMode": "inOrder",
+    "useAcrylicInTabRow": true
 }
