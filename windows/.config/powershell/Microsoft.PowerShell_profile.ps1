@@ -1,5 +1,5 @@
 #~/.config/powershell/Microsoft.PowerShell_profile.ps1
-Invoke-Expression (&starship init powershell)
+(Get-Command oh-my-posh).Source
 
 # Bash like functionality
 function ll { ls -al @args }
