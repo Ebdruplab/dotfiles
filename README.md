@@ -22,3 +22,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object
 
 ### Font installation
 oh-my-posh font install # and i download hack
+
+### windows-terminal.json
+
+the `windows-terminal.json` is the settings.json for your windows terminal. 
