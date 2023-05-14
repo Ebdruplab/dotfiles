@@ -1,5 +1,5 @@
 # The theme used by posh
-export POSH_THEME='~/.config/oh-my-posh/theme/night-owl.omp.json'
+export POSH_THEME='~/.config/oh-my-posh/themes/night-owl.omp.json'
 export POSH_SHELL_VERSION=$BASH_VERSION
 export POWERLINE_COMMAND="oh-my-posh"
 export POSH_PID=$$

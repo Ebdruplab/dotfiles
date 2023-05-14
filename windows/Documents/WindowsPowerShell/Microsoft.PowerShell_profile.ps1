@@ -4,11 +4,11 @@ $psVersion = $PSVersionTable.PSVersion.Major
 
 if ($psVersion -eq 5) {
     # Code to run if PowerShell version is 5
-    (@(& 'C:/Users/Kristian/AppData/Local/Programs/oh-my-posh/bin/oh-my-posh.exe' init powershell --config="$($ENV:USERPROFILE)\.config\oh-my-posh\night-owl.omp.json" --print) -join "`n") | Invoke-Expression
+    (@(& 'C:/Users/Kristian/AppData/Local/Programs/oh-my-posh/bin/oh-my-posh.exe' init powershell --config="$($ENV:USERPROFILE)\.config\oh-my-posh\themes\night-owl.omp.json" --print) -join "`n") | Invoke-Expression
 }
 elseif ($psVersion -eq 7) {
     # Code to run if PowerShell version is 7
-    (@(& 'C:/Users/Kristian/AppData/Local/Programs/oh-my-posh/bin/oh-my-posh.exe' init pwsh --config="$($ENV:USERPROFILE)\.config\oh-my-posh\night-owl.omp.json" --print) -join "`n") | Invoke-Expression
+    (@(& 'C:/Users/Kristian/AppData/Local/Programs/oh-my-posh/bin/oh-my-posh.exe' init pwsh --config="$($ENV:USERPROFILE)\.config\oh-my-posh\themes\night-owl.omp.json" --print) -join "`n") | Invoke-Expression
 }
 else {
     # Code to run if the PowerShell version is neither 5 nor 7
