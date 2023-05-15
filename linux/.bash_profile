@@ -109,6 +109,9 @@ extract() {
     fi
 }
 
+data_usage() {
+    du -sh --exclude='/proc/*' --exclude='/tmp/*' --exclude='/var/*' /* 2>/dev/null | sort -hr
+}
 # Set the terminal colors
 # -----------------------
 # Check if the hostname starts with "prod-"
