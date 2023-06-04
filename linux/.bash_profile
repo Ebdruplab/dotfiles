@@ -84,15 +84,26 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
 
+
+
+
+# Functions
+# -----------
 # Git fast track alias
-function giadd() {
+# Function to add, commit, and push changes to a Git repository
+# Usage: cgitadd "commit message"
+#
+# Args:
+#     commit message (str): The commit message describing the changes.
+#
+# Returns:
+#     None
+function cgitadd() {
     git add .
     git commit -m "$1"
     git push
 }
 
-# Functions
-# -----------
 #  extract:  Extract most know archives with one command
 extract() {
     if [ -f $1 ]; then
