@@ -84,6 +84,13 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
 
+# Git fast track alias
+function giadd() {
+    git add .
+    git commit -m "$1"
+    git push
+}
+
 # Functions
 # -----------
 #  extract:  Extract most know archives with one command
