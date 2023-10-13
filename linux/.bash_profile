@@ -84,6 +84,9 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
 
+# Windows 
+# -------
+alias explorer="explorer.exe ."
 
 
 
