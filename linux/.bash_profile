@@ -26,24 +26,6 @@ if [ -d "/usr/local/bin" ]; then
     PATH="$PATH:/usr/local/bin"
 fi
 
-# SSH
-# ----
-# Startigng ssh agent and adding the id_rsa
-eval $(ssh-agent) >/dev/null
-
-# Load ssh key but if failing i need to know
-if [ -f "$HOME/.ssh/id_rsa" ]; then
-    ssh-add ~/.ssh/id_rsa 1>/dev/null
-fi
-
-if [ -f "$HOME/.ssh/id_rsa_kris9854" ]; then
-    ssh-add ~/.ssh/id_rsa_kris9854 1>/dev/null
-fi
-
-if [ -f "id_rsa_kekomplexit" ]; then
-    ssh-add ~/.ssh/id_rsa_kekomplexit 1>/dev/null
-fi
-
 # Terminal Improvements
 # ---------------------
 # Setup
@@ -87,7 +69,6 @@ alias rm='rm -i'
 # Windows 
 # -------
 alias explorer="explorer.exe ."
-
 
 
 # Functions
@@ -149,7 +130,18 @@ if [[ "$HOSTNAME" == prod-* ]]; then
 $(tput setaf 15)\]:\w\[$(tput sgr0)\]$ "
     fi
 fi
-# Oh by post for bash
-eval "$(oh-my-posh init bash)"
-source ~/.config/oh-my-posh/.posh_init_bash.sh
-source ~/.config/oh-my-posh/.posh_completion_bash.sh
+
+# SSH
+# ----
+# Startigng ssh agent and adding the id_rsa
+eval $(ssh-agent) >/dev/null
+
+# Load ssh key but if failing i need to know
+if [ -f "$HOME/.ssh/id_rsa_kris9854" ]; then
+    ssh-add $HOME/.ssh/id_rsa_kris9854
+fi
+
+if [ -f "$HOME/.ssh/id_rsa_hyperv" ]; then
+    ssh-add $HOME/.ssh/id_rsa_hyperv 1>/dev/null
+fi
+
