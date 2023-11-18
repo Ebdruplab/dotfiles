@@ -1,5 +1,4 @@
-"""""""""""""""""""""""""""""""""
-"# Section General vim configs #"
+" Section General vim configs
 colorscheme smyck
 " Sets how many lines of history VIM has to remember
 set history=500
@@ -8,23 +7,47 @@ set history=500
 filetype plugin on
 filetype indent on
 
+" Enable syntax highlighting
+syntax on
+
+" Highlight current line
+set cursorline
+
 " Show the current mode in the status line
 set showmode
 
-" Show line numbers
-set number
+" Show matching brackets/parentheses
+set showmatch
 
-"""""""""""""""""""""""""""""""""""""
-"# Section Files, backups and undo #"
+" Faster command-line completion
+set wildmenu
+
+" Ignore case in search patterns
+set ignorecase
+
+" Show line numbers
+"set number
+
+" Function to toggle line numbering
+function! ToggleNumbers()
+  if(&number == 1)
+    set nonumber
+    set norelativenumber
+  else
+    set number
+    set relativenumber
+  endif
+endfunction
+nnoremap <leader>n :call ToggleNumbers()<CR>
+
+" Section Files, backups and undo
 
 " Turn backup off, since most stuff is in SVN, git etc. anyway...
 "set nobackup
 "set nowb
 set noswapfile
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""""""""""""""""""""""""""""""""""""""""""
-"# SECTION Text, tab and indent related #"
+" SECTION Text, tab and indent related
 " Use spaces instead of tabs
 set expandtab
 
@@ -39,12 +62,11 @@ set tabstop=2
 set lbr
 set tw=500
 
-set ai "Auto indent
-set si "Smart indent
-set wrap "Wrap lines
+set ai " Auto indent
+set si " Smart indent
+set wrap " Wrap lines
 
-""""""""""""""""""""""""""""""""""
-"# SECTION FOR REGEX HIGHTLIGHTS #"
+" SECTION FOR REGEX HIGHLIGHTS
 " Highlight trailing whitespace (helps with YAML syntax errors)
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
