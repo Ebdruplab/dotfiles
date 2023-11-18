@@ -1,5 +1,5 @@
 " Section General vim configs
-colorscheme smyck.vim
+colorscheme smyck
 " Sets how many lines of history VIM has to remember
 set history=500
 
@@ -62,19 +62,3 @@ match ExtraWhitespace /\s\+$/
 " Highlight lines that start with a comment character (#)
 highlight CommentLine ctermbg=yellow guibg=yellow
 match CommentLine /^#.*$/
-
-" Highlight lines that contain a URL
-highlight Url ctermfg=blue guifg=blue
-match Url /http[s]\?:\/\/\S\+/
-
-" Highlight lines that contain an email address
-highlight Email ctermfg=green guifg=green
-match Email /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/
-
-" Highlight lines that contain a URL with a scheme (http://, https://, ftp://, etc.)
-highlight SchemeUrl ctermfg=cyan guifg=cyan
-match SchemeUrl /\vhttps?:\/\/\S+/
-
-" Highlight valid IPv4 addresses
-highlight IPAddr ctermbg=magenta guibg=magenta
-2match IPAddr /\b(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.\(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.\(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.\(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b/
