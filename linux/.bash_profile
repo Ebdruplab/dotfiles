@@ -118,4 +118,4 @@ load_config_file() {
 }
 
 # Usage: load_config_file ".ansible_variables"
-load_config_file ".ansible_variables"
+load_config_file ".ansible_variables.sh"

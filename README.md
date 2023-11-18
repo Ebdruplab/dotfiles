@@ -8,7 +8,7 @@ JetBrainsMono Nerd font from "nerdfonts.com"
 ## Bash
 
 IF YOU JUST WANT TO USE THE .vimrc, .bash_profile and the .config/.ansible_vars just use this command to auto download all the usefull files.
-`wget -qO- https://raw.githubusercontent.com/Ebdruplab/dotfiles/main/linux/init_linux_configs.sh | sudo bash`
+`wget -qO- https://raw.githubusercontent.com/Ebdruplab/dotfiles/main/linux/init_linux_configs.sh | bash`
 
 
 Better to use posh than starship
