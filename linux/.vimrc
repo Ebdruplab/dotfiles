@@ -28,18 +28,6 @@ set ignorecase
 " Show line numbers
 "set number
 
-" Function to toggle line numbering
-function! ToggleNumbers()
-  if(&number == 1)
-    set nonumber
-    set norelativenumber
-  else
-    set number
-    set relativenumber
-  endif
-endfunction
-nnoremap <leader>n :call ToggleNumbers()<CR>
-
 " Section Files, backups and undo
 
 " Turn backup off, since most stuff is in SVN, git etc. anyway...
