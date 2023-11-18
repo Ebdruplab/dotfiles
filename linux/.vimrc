@@ -54,11 +54,13 @@ set ai " Auto indent
 set si " Smart indent
 set wrap " Wrap lines
 
+
+" Change cursor shape in different modes
+let &t_SI = "\e[5 q" " I-Beam in insert mode
+let &t_EI = "\e[5 q" " Block in normal mode
+
+
 " SECTION FOR REGEX HIGHLIGHTS
 " Highlight trailing whitespace (helps with YAML syntax errors)
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
-
-" Highlight lines that start with a comment character (#)
-highlight CommentLine ctermbg=yellow guibg=yellow
-match CommentLine /^#.*$/
