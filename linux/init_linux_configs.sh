@@ -4,7 +4,7 @@
 BASE_URL="https://raw.githubusercontent.com/Ebdruplab/dotfiles/main/linux"
 
 # List of files to download
-declare -a files=(".bash_profile" ".vimrc" ".vim/colors/smyck.vim" ".config/.ansible_variables.sh" "")
+declare -a files=(".bash_profile" ".vimrc" ".vim/colors/smyck.vim" ".config/.ansible_variables.sh")
 
 # Function to download each file
 download_file() {
@@ -18,6 +18,9 @@ download_file() {
     # Download the file
     echo "Downloading ${file}..."
     curl -fsSL "$url" -o "$target"
+
+    # Set file permissions to 600
+    chmod 600 "$target"
 }
 
 # Download each file in the list
