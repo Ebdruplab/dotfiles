@@ -59,8 +59,3 @@ set wrap " Wrap lines
 let &t_SI = "\e[5 q" " I-Beam in insert mode
 let &t_EI = "\e[5 q" " Block in normal mode
 
-
-" SECTION FOR REGEX HIGHLIGHTS
-" Highlight trailing whitespace (helps with YAML syntax errors)
-highlight ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+$/
