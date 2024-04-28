@@ -1,0 +1,5 @@
+# EXPORTS
+# -------
+export SAT_USERNAME=<USERNAME>
+export AUTOMATIONHUB_API_KEY=<API_KEY>
+export AUTOMATIONHUB_SERVER=<Hub_sever>
