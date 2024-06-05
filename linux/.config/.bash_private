@@ -1,5 +1,15 @@
-# EXPORTS
-# -------
+# Custom Script Exports
 export SAT_USERNAME=<USERNAME>
 export AUTOMATIONHUB_API_KEY=<API_KEY>
 export AUTOMATIONHUB_SERVER=<Hub_sever>
+
+# Fabric Exports
+# ---------------
+# Need ollama remote or local - https://www.ollama.com/
+# Need fabric - https://github.com/danielmiessler/fabric
+if command -v fabric &> /dev/null; then
+    export OPENAI_API_KEY="NULL"
+    export DEFAULT_MODEL="llama3:latest"
+    export OPENAI_BASE_URL="http://localhost:11434/v1/"
+fi
+

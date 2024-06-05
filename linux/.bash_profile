@@ -6,8 +6,8 @@
 # Source .bashrc and .profile if they exist
 [ -f "$HOME/.bashrc" ] && . "$HOME/.bashrc"
 [ -f "$HOME/.profile" ] && . "$HOME/.profile"
-[ -f "$HOME/.config/.bash_public" ] && . "$HOME/.bash_public"
-[ -f "$HOME/.config/.bash_private" ] && . "$HOME/.bash_private"
+[ -f "$HOME/.config/.bash_public" ] && . "$HOME/.config/.bash_public"
+[ -f "$HOME/.config/.bash_private" ] && . "$HOME/.config/.bash_private"
 
 # Variables
 # ---------
@@ -15,7 +15,7 @@
 directories=("$HOME/bin" "$HOME/.local/bin" "/usr/local/bin" "$HOME/git/ebdruplab/ansible-shared/scripts")
 
 # Define a list of your SSH keys
-SSH_KEYS=("id_rsa_example1" "access_example" "idexample")
+SSH_KEYS=("id_rsa" "access_example" "idexample")
 
 # Initialize an array to hold the additional paths
 additional_paths=()
