@@ -336,3 +336,15 @@ function install_collection() {
         ansible-galaxy collection install "$1" --api-key="$AUTOMATIONHUB_API_KEY" -s "$url" "${@:2}"
     fi
 }
+
+eb_lookup_ip() {
+    if [ $# -eq 0 ]; then
+        echo "Usage: lookup_ip <ip1> <ip2> <ip3> ..."
+        return 1
+    fi
+
+    for IP in "$@"; do
+        echo "Looking up IP: $IP"
+        nslookup $IP
+    done
+}
