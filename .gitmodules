@@ -1,0 +1,3 @@
+[submodule "linux/.config/private-dotfiles"]
+path =  "linux/.config/private-dotfiles"
+url = git@github.com:kris9854/private-dotfiles.git
