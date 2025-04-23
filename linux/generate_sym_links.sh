@@ -10,22 +10,24 @@ echo "Linking .config files..."
 CONFIG_DIR="$HOME/.config"
 mkdir -p "$CONFIG_DIR"
 
-find "$SCRIPT_DIR/.config" -mindepth 1 -type d | while read -r dir; do
-    target="$CONFIG_DIR/$(realpath --relative-to="$SCRIPT_DIR/.config" "$dir")"
-    mkdir -p "$target"
+# Loop through each entry in $SCRIPT_DIR/.config and link it into $HOME/.config
+for item in "$SCRIPT_DIR/.config/"*; do
+  target="$CONFIG_DIR/$(basename "$item")"
+  if [ -e "$target" ] || [ -L "$target" ]; then
+    echo "Skipping existing $target"
+  else
+    ln -s "$item" "$target"
+    echo "Linked $item → $target"
+  fi
 done
 
-find "$SCRIPT_DIR/.config" -type f | while read -r file; do
-    rel_path="$(realpath --relative-to="$SCRIPT_DIR/.config" "$file")"
-    target="$CONFIG_DIR/$rel_path"
-    ln -sf "$file" "$target"
-    echo "Linked $target"
-done
+# Link .zshrc
+ZSHRC_SOURCE="$SCRIPT_DIR/.zshrc"
+ZSHRC_TARGET="$HOME/.zshrc"
+if [ -e "$ZSHRC_TARGET" ] || [ -L "$ZSHRC_TARGET" ]; then
+  echo "Skipping existing $ZSHRC_TARGET"
+else
+  ln -s "$ZSHRC_SOURCE" "$ZSHRC_TARGET"
+  echo "Linked $ZSHRC_SOURCE → $ZSHRC_TARGET"
+fi
 
-# Link top-level dotfiles (e.g. .zshrc, init_linux_configs.sh)
-echo "Linking top-level dotfiles..."
-find "$SCRIPT_DIR" -maxdepth 1 -type f \( -name ".*" -o -name "*.sh" \) | while read -r file; do
-    filename="$(basename "$file")"
-    ln -sf "$file" "$HOME/$filename"
-    echo "Linked $HOME/$filename"
-done
