@@ -16,5 +16,13 @@ vim.g.clipboard = {
   cache_enabled = 0,
 }
 
+
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = { "*/playbooks/*.yml", "*/roles/**/*.yml" },
+  callback = function()
+    vim.bo.filetype = "yaml.ansible"
+  end,
+})
+
 -- local o = vim.o
 -- o.cursorlineopt ='both' -- to enable cursorline!
