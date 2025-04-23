@@ -12,4 +12,12 @@ map("n", "\\", "<cmd>NvimTreeFocus<CR>", { desc = "Toggle NvimTree" })
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
 
+-- Exit terminal mode and go to previous window
+vim.keymap.set('t', '<M-æ>', [[<C-\><C-n><C-w>p]], { noremap = true, silent = true })
+
+-- In normal mode, jump to the terminal window
+vim.keymap.set('n', '<M-æ>', '<C-w>p:startinsert<CR>', { noremap = true, silent = true })
+
+
+
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")

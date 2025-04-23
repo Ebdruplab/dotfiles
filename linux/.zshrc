@@ -133,7 +133,7 @@ eval "$(starship init zsh)"
 SSH_KEYS=(
   #"id_rsa"
   #"id_bitbucket"
-  "id_ed25519_linux_key_a-sosdakew"
+  #"id_ed25519_linux_key_a-sosdakew"
   #"id_rsa_ssh_access"
   #"id_rsa_hyperv"
   #"id_rsa_ebdruplab_kris9854"
