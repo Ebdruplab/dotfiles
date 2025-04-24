@@ -27,9 +27,9 @@ fi
 # Load custom configurations and secrets
 # --------------------------------------
 [ -f "$HOME/.config/zsh/shell_functions.sh" ] && source "$HOME/.config/zsh/shell_functions.sh"
+[ -f "$HOME/.config/zsh/exports.sh" ] && source "$HOME/.config/zsh/exports.sh"
 [ -f "$HOME/.config/zsh/.secrets.sh" ] && source "$HOME/.config/zsh/.secrets.sh"
 [ -f "$HOME/.config/zsh/.secrets.sh" ] && source "$HOME/.config/private-dotfiles/private_zsh/.secrets.sh"
-[ -f "$HOME/.config/zsh/exports.sh" ] && source "$HOME/.config/zsh/exports.sh"
 # Check and load Oh-My-Posh
 # -------------------------
 #if command -v oh-my-posh &>/dev/null; then

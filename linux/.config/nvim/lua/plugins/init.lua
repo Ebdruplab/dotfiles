@@ -27,4 +27,31 @@ return {
   	},
    	},
   },
+-- custom
+  {
+  "mg979/vim-visual-multi",
+  branch = "master",
+  init = function()
+    vim.g.VM_default_mappings = 0 -- disable defaults
+  end,
+  config = function()
+    vim.g.VM_maps = {
+      -- Word selection
+      ["Find Under"]          = "<C-d>",       -- Ctrl+D
+      ["Find Subword Under"] = "<C-d>",        -- Ctrl+D
+
+      -- Add cursors vertically
+      ["Add Cursor Down"]    = {"<C-M-j>", "<C-M-Down>"}, -- Ctrl+Alt+J or ↓
+      ["Add Cursor Up"]      = {"<C-M-k>", "<C-M-Up>"},   -- Ctrl+Alt+K or ↑
+
+      -- Visual selection to multiple cursors
+      ["Visual Cursors"]     = "<C-M-å>",      -- Ctrl+Alt+N
+
+      -- Select all like current
+      ["Select All"]         = "<C-M-a>",      -- Ctrl+Alt+A
+    }
+  end
+}
+
+
 }

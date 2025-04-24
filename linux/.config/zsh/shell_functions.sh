@@ -179,6 +179,31 @@ function pssh() {
 }
 
 # Function to connect via SSH using a specified SSH key
+function jssh() {
+    if [[ "$1" == "-h" || "$1" == "--help" || -z "$1" ]]; then
+        printf "Usage: jssh [host]\n"
+        printf "Connect to a target host via a jump server using a safe AD-style username.\n\n"
+        printf "Env vars:\n"
+        printf "  CUSTOM_SSH_USER           Username (e.g. a-sosdakew)\n"
+        printf "  CUSTOM_SSH_USER_DOMAIN    Domain (e.g. sos.eu)\n"
+        printf "  CUSTOM_SSH_JUMPIDENTITY   Identity file for jump host\n"
+        printf "  CUSTOM_SSH_JUMPSRV        Jump host address\n"
+        return 1
+    fi
+
+    local target_host="$1"
+    local user="${CUSTOM_SSH_USER}"
+    local domain="${CUSTOM_SSH_USER_DOMAIN}"
+    local identityfile="$CUSTOM_SSH_JUMPIDENTITY"
+    local jumpsrv="$CUSTOM_SSH_JUMPSRV"
+
+    # Combine domain and user with a safe separator (dash)
+    local fulluser="${domain}@${user}"
+
+    echo ssh -J "'${fulluser}'@${jumpsrv}" -i "$identityfile" "'${fulluser}'@${target_host}"
+}
+
+# Function to connect via SSH using a specified SSH key
 function issh() {
     if [[ "$1" == "-h" || "$1" == "--help" ]]; then
         printf "Usage: issh [user] <host>\n"
