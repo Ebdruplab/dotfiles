@@ -18,6 +18,7 @@ vim.keymap.set('t', '<M-æ>', [[<C-\><C-n><C-w>p]], { noremap = true, silent = t
 -- In normal mode, jump to the terminal window
 vim.keymap.set('n', '<M-æ>', '<C-w>p:startinsert<CR>', { noremap = true, silent = true })
 
-
+-- setup mapping to call :LazyGit
+vim.keymap.set('n', '<leader>gg', '<cmd>:LazyGit<CR>', { noremap = true, silent = true })
 
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
