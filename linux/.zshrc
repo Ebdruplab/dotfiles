@@ -1,3 +1,6 @@
+# To make it work also install
+# https://github.com/jesseduffield/lazygit?tab=readme-ov-file#debian-and-ubuntu
+# fzf nvchad prerequists
 ## Errors
 if ! command -v fzf &>/dev/null; then
   echo "⚠️  fzf is not installed. zsh-interactive-cd may not work properly."
