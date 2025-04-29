@@ -23,7 +23,7 @@ alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias toupper="tr '[:lower:]' '[:upper:]'"
 alias tolower="tr '[:upper:]' '[:lower:]'"
-
+alias tmux="tmux -f ~/.config/tmux/tmux.conf"
 # Ansible Aliases
 # ---------------------
 alias a='ansible '

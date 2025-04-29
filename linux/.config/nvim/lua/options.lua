@@ -24,5 +24,10 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   end,
 })
 
+vim.api.nvim_create_autocmd("TextYankPost", {
+    callback = function()
+        vim.highlight.on_yank()
+    end,
+})
 -- local o = vim.o
 -- o.cursorlineopt ='both' -- to enable cursorline!
