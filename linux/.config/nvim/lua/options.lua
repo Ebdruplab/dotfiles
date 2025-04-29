@@ -29,5 +29,10 @@ vim.api.nvim_create_autocmd("TextYankPost", {
         vim.highlight.on_yank()
     end,
 })
+
+-- enable line number + relative numbers
+vim.opt.number = true
+vim.opt.relativenumber = true
+
 -- local o = vim.o
 -- o.cursorlineopt ='both' -- to enable cursorline!
