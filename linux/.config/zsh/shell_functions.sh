@@ -23,21 +23,13 @@ alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias toupper="tr '[:lower:]' '[:upper:]'"
 alias tolower="tr '[:upper:]' '[:lower:]'"
+
+# TMUX Aliases
+# -------------
 alias tmux="tmux -f ~/.config/tmux/tmux.conf"
-# Ansible Aliases
-# ---------------------
-alias a='ansible '
-alias aconf='ansible-config '
-alias acon='ansible-console '
-alias aver='ansible-version'
-alias arinit='ansible-role-init'
-alias aplaybook='ansible-playbook '
-alias ainv='ansible-inventory '
-alias adoc='ansible-doc '
-alias agal='ansible-galaxy '
-alias apull='ansible-pull '
-alias aval='ansible-vault'
-alias ahelp='ansible-help '
+alias tmux_ebdruplab='bash -c "$HOME/.config/scripts/tmux_session/ebdruplab_tmux.sh"'
+alias tmux_work='bash -c "$HOME/.config/scripts/tmux_session/work_tmux.sh"'
+
 
 # GIT Aliases
 # ------------------
@@ -294,3 +286,4 @@ function largest_files() {
         return 1
     fi
 }
+
