@@ -129,7 +129,7 @@ bindkey '^N' down-line-or-history
 # Starship setup
 # ---------------
 # curl -sS https://starship.rs/install.sh | sh
-export STARSHIP_CONFIG=~/.config/starship/starship.toml
+export STARSHIP_CONFIG=$HOME/.config/starship/starship.toml
 eval "$(starship init zsh)"
 
 # Define SSH keys
