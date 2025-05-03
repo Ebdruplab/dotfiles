@@ -1,3 +1,5 @@
+# Ignore tmux plugins
+linux/.config/tmux/plugins/*
 # Ignore specific files/directories under linux/.config/
 linux/.config/abrt
 linux/.config/akonadi

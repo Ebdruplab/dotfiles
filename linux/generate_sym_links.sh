@@ -31,3 +31,23 @@ else
   echo "Linked $ZSHRC_SOURCE → $ZSHRC_TARGET"
 fi
 
+# Link .gitconfig
+GITCONFIG_SOURCE="$SCRIPT_DIR/.gitconfig"
+GITCONFIG_TARGET="$HOME/.gitconfig"
+if [ -e "$GITCONFIG_TARGET" ] || [ -L "$GITCONFIG_TARGET" ]; then
+  echo "Skipping existing $GITCONFIG_TARGET"
+else
+  ln -s "$GITCONFIG_SOURCE" "$GITCONFIG_TARGET"
+  echo "Linked $GITCONFIG_SOURCE → $GITCONFIG_TARGET"
+fi
+
+# Link .inputrc
+INPUTRC_SOURCE="$SCRIPT_DIR/.gitconfig"
+INPUTRC_TARGET="$HOME/.gitconfig"
+if [ -e "$INPUTRC_TARGET" ] || [ -L "$GITCONFIG_TARGET" ]; then
+  echo "Skipping existing $INPUTRC_TARGET"
+else
+  ln -s "$INPUTRC_SOURCE" "$GITCONFIG_TARGET"
+  echo "Linked $INPUTRC_SOURCE → $GITCONFIG_TARGET"
+fi
+
