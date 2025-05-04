@@ -154,3 +154,8 @@ for key in "${SSH_KEYS[@]}"; do
   [ -f "$key_path" ] && /bin/ssh-add "$key_path" >/dev/null
 done
 
+# OPEN TUX
+# --------
+if [ "$(hostname)" = "FedoraWorkstation" ]; then
+#  tmux_ebdruplab
+fi
