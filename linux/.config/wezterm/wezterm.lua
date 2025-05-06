@@ -1,15 +1,40 @@
 local wezterm = require("wezterm")
 
--- Load modules
+-- Import modular configuration
 local options = require("modules.options")
-local keys = require("modules.keymapping")
+local key_mappings = require("modules.keymapping")
+local commands = require("modules.command")
+local wsl = require("modules.wsl")
+local tab_manipulation = require("modules.tab_manipulation")
 
--- Apply settings
-for k, v in pairs(options) do
-  wezterm.config[k] = v
+-- Initialize config builder
+local config = wezterm.config_builder()
+
+-- Apply appearance and behavior settings
+for key, value in pairs(options) do
+  config[key] = value
 end
 
-wezterm.config.keys = keys
+-- Apply key mappings
+if type(key_mappings) == "table" then
+  config.keys = key_mappings
+end
 
-return wezterm.config
+-- Apply WSL-specific settings (Windows only)
+if wezterm.target_triple:find("windows") then
+  local wsl_config = wsl.get_config()
+  for key, value in pairs(wsl_config) do
+    config[key] = value
+  end
+end
 
+-- Register command palette items
+wezterm.on("augment-command-palette", function()
+  return commands
+end)
+
+-- Set up initial tabs and panes
+tab_manipulation.setup_tabs()
+
+-- Return final config
+return config
