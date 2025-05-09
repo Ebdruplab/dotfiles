@@ -55,56 +55,56 @@ return {
   -- Navigate pane: left
   {
     key = "LeftArrow",
-    mods = "CTRL|SHIFT",
+    mods = "CTRL|ALT",
     action = act.ActivatePaneDirection("Left"),
   },
 
   -- Navigate pane: right
   {
     key = "RightArrow",
-    mods = "CTRL|SHIFT",
+    mods = "CTRL|ALT",
     action = act.ActivatePaneDirection("Right"),
   },
 
   -- Navigate pane: up
   {
     key = "UpArrow",
-    mods = "CTRL|SHIFT",
+    mods = "CTRL|ALT",
     action = act.ActivatePaneDirection("Up"),
   },
 
   -- Navigate pane: down
   {
     key = "DownArrow",
-    mods = "CTRL|SHIFT",
+    mods = "CTRL|ALT",
     action = act.ActivatePaneDirection("Down"),
   },
   -- Vim-style pane navigation with CTRL+SHIFT
   {
     key = "h",
-    mods = "CTRL|SHIFT",
+    mods = "CTRL|ALT",
     action = act.ActivatePaneDirection("Left"),
   },
   {
     key = "l",
-    mods = "CTRL|SHIFT",
+    mods = "CTRL|ALT",
     action = act.ActivatePaneDirection("Right"),
   },
   {
     key = "k",
-    mods = "CTRL|SHIFT",
+    mods = "CTRL|ALT",
     action = act.ActivatePaneDirection("Up"),
   },
   {
     key = "j",
-    mods = "CTRL|SHIFT",
+    mods = "CTRL|ALT",
     action = act.ActivatePaneDirection("Down"),
   },
 
   -- Split pane (auto direction)
   {
     key = "S",
-    mods = "ALT|SHIFT",
+    mods = "CTRL|ALT",
     action = act.SplitPane({
       direction = "Down",
       size = {
@@ -114,7 +114,7 @@ return {
   },
   {
     key = "D",
-    mods = "ALT|SHIFT",
+    mods = "CTRL|ALT",
     action = act.SplitPane({
       direction = "Right",
       size = {
