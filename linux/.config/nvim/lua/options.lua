@@ -1,10 +1,10 @@
 require "nvchad.options"
 
--- add yours here!
--- filetypes
+-- Add yours here!
+-- Filetypes
 vim.cmd 'autocmd BufRead *.yaml,*.yml if expand("%:p") =~ "ansible" | setfiletype yaml.ansible | endif'
 
--- copy on wsl
+-- Copy on wsl
 if vim.fn.has("wsl") == 1 then
   vim.g.clipboard = {
     name = 'WslClipboard',
@@ -27,16 +27,20 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   end,
 })
 
+-- NOTE Highlight on yank - with Search > sets to yellow
 vim.api.nvim_create_autocmd("TextYankPost", {
+  desc = "Highlight yanked text",
+  group = vim.api.nvim_create_augroup("YankHighlight", { clear = true }),
+  pattern = "*",
   callback = function()
-    local ok, hl = pcall(require, "vim.highlight")
-    if ok and hl.on_yank then
-      hl.on_yank({ higroup = "IncSearch", timeout = 150 })
-    end
+    vim.highlight.on_yank({
+      higroup = "Search",
+      timeout = 200,
+    })
   end,
 })
 
--- enable line number + relative numbers
+-- Enable line number + relative numbers
 vim.opt.number = true
 vim.opt.relativenumber = true
 

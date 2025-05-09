@@ -178,3 +178,5 @@ done
 if [ "$(hostname)" = "FedoraWorkstation" ]; then
 #  tmux_ebdruplab
 fi
+clear
+
