@@ -40,20 +40,6 @@ function M.setup_tabs()
       cwd = home
     })
 
-    -- Create 4. tab: Dotfiles
-    local tab4, pane4 = window:spawn_tab({ cwd = dotfiles_dir })
-    tab4:set_title("Dotfiles")
-
-    -- Create 5. tab: 3screens
-    local tab5, pane5 = window:spawn_tab({ cwd = home })
-    tab5:set_title("3Screens")
-
-    -- Split the fifth tab horizontally
-    pane5:split({
-      direction = "Bottom",
-      size = 0.5,
-      cwd = home
-    })
     -- Create fifth tab: 3Screens
     local tab5, pane_left = window:spawn_tab({ cwd = home })
     tab5:set_title("3Screens")
