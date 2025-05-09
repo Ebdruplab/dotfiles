@@ -1,5 +1,6 @@
 # Ignore tmux plugins
 linux/.config/tmux/plugins/*
+linux/.config/nvim/lazy-lock.json
 # Ignore specific files/directories under linux/.config/
 linux/.config/abrt
 linux/.config/akonadi
