@@ -143,4 +143,9 @@ return {
     mods = "",
     action = act.ActivateTab(3),
   },
+  {
+    key = "F5",
+    mods = "",
+    action = act.ActivateTab(4),
+  },
 }
