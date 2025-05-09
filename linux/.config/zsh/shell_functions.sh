@@ -1,5 +1,10 @@
 # Terminal Improvements
 # ---------------------
+# Enable old app alias
+# --------------------
+alias neofetch='fastfetch'
+alias vim='nvim'
+alias vi='nvim'
 
 # Directory navigation aliases
 # ----------------------------
