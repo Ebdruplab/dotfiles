@@ -148,4 +148,10 @@ return {
     mods = "",
     action = act.ActivateTab(4),
   },
+  -- Zoom in and out of Pane
+  {
+    key = "z",
+    mods = "CTRL|ALT",
+    action = act.TogglePaneZoomState,
+  },
 }
