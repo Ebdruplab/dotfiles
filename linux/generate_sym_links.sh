@@ -42,12 +42,12 @@ else
 fi
 
 # Link .inputrc
-INPUTRC_SOURCE="$SCRIPT_DIR/.gitconfig"
-INPUTRC_TARGET="$HOME/.gitconfig"
-if [ -e "$INPUTRC_TARGET" ] || [ -L "$GITCONFIG_TARGET" ]; then
+INPUTRC_SOURCE="$SCRIPT_DIR/.inputrc"
+INPUTRC_TARGET="$HOME/.inputrc"
+if [ -e "$INPUTRC_TARGET" ] || [ -L "$INPUTRC_TARGET" ]; then
   echo "Skipping existing $INPUTRC_TARGET"
 else
-  ln -s "$INPUTRC_SOURCE" "$GITCONFIG_TARGET"
-  echo "Linked $INPUTRC_SOURCE → $GITCONFIG_TARGET"
+  ln -s "$INPUTRC_SOURCE" "$INPUTRC_TARGET"
+  echo "Linked $INPUTRC_SOURCE → $INPUTRC_TARGET"
 fi
 

@@ -122,25 +122,25 @@ return {
       }
     })
   },
-  -- Tab navigation with CTRL+SHIFT+1–4
+  -- Tab navigation using function keys
   {
-    key = "1",
-    mods = "CTRL|SHIFT",
+    key = "F1",
+    mods = "",
     action = act.ActivateTab(0),
   },
   {
-    key = "2",
-    mods = "CTRL|SHIFT",
+    key = "F2",
+    mods = "",
     action = act.ActivateTab(1),
   },
   {
-    key = "3",
-    mods = "CTRL|SHIFT",
+    key = "F3",
+    mods = "",
     action = act.ActivateTab(2),
   },
   {
-    key = "4",
-    mods = "CTRL|SHIFT",
+    key = "F4",
+    mods = "",
     action = act.ActivateTab(3),
   },
 }
