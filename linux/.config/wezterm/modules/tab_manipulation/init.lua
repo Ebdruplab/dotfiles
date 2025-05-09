@@ -33,16 +33,44 @@ function M.setup_tabs()
     local tab3, pane3 = window:spawn_tab({ cwd = home })
     tab3:set_title("Dual")
 
-    -- Split the third tab horizontally (side by side)
+    -- Split the third tab horizontally
     pane3:split({
       direction = "Bottom",
       size = 0.5,
       cwd = home
     })
 
-    -- Create second tab: Code
+    -- Create 4. tab: Dotfiles
     local tab4, pane4 = window:spawn_tab({ cwd = dotfiles_dir })
-    tab4:set_title("dotfiles")
+    tab4:set_title("Dotfiles")
+
+    -- Create 5. tab: 3screens
+    local tab5, pane5 = window:spawn_tab({ cwd = home })
+    tab5:set_title("3Screens")
+
+    -- Split the fifth tab horizontally
+    pane5:split({
+      direction = "Bottom",
+      size = 0.5,
+      cwd = home
+    })
+    -- Create fifth tab: 3Screens
+    local tab5, pane_left = window:spawn_tab({ cwd = home })
+    tab5:set_title("3Screens")
+
+    -- Split RIGHT of the LEFT pane
+    local pane_right_top = pane_left:split({
+      direction = "Right",
+      size = 0.5,
+      cwd = home,
+    })
+
+    -- Split DOWN inside the RIGHT pane
+    pane_right_top:split({
+      direction = "Bottom",
+      size = 0.5,
+      cwd = home,
+    })
 
     -- Focus the first tab
     window:gui_window():perform_action(
