@@ -1,5 +1,9 @@
 # Exports not secret
-
+# defaul exports
+export EDITOR="nvim"
+export VISUAL="nvim"
+export LANG="en_DK.UTF-8"
+export LC_ALL="en_DK.UTF-8"
 # Ansible
 export ANSIBLE_TIMEOUT='200'
 
