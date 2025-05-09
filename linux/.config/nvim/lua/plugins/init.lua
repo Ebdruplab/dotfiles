@@ -22,8 +22,8 @@ return {
   	"nvim-treesitter/nvim-treesitter",
   	opts = {
   		ensure_installed = {
-   			"vim", "lua", "vimdoc",
-        "html", "css"
+   			"vim", "lua", "vimdoc", "xml", "ssh_config", "json",
+        "html", "css", "comment", "powershell", "bash", 
   	},
    	},
   },
@@ -62,7 +62,7 @@ return {
   },
 -- custom
 -- nvim v0.8.0
-{
+  {
     "kdheepak/lazygit.nvim",
     lazy = false,
     cmd = {
@@ -81,5 +81,11 @@ return {
         require("telescope").load_extension("lazygit")
         --require "configs.lspconfig"
     end,
-},
+  },
+  {
+    "folke/todo-comments.nvim",
+    Lazy = false,
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {}
+  }
 }

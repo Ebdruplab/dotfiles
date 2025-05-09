@@ -9,8 +9,8 @@ M.base46 = {
 	theme = "catppuccin",
 
 	hl_override = {
- 	  Comment = { italic = true },
- 	  ["@comment"] = { italic = true },
+ 	  Comment = { italic = true, fg = "#9580FF"  },
+ 	  ["@comment"] = { italic = true, fg = "#9580FF"  },
 	},
 }
 -- M.nvdash = { load_on_startup = true }
