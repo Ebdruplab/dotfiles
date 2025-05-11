@@ -13,6 +13,7 @@ local dotfiles_dir = ebd_proj_dir .. "/dotfiles"
 
 if hostname == "FedoraLinux" then
   code_dir = ebd_proj_dir .. "/CodeCabinet"
+  code_collection_dir = ebd_proj_dir .. "/ansible-collection_ebdruplab"
 else
   code_dir = work_proj_dir .. "/ansible-nginx_automation"
 end
@@ -44,6 +45,25 @@ function M.setup_tabs()
     local tab4, pane4 = window:spawn_tab({ cwd = dotfiles_dir })
     tab4:set_title("Dotfiles")
 
+  if hostname == "FedoraLinux" then
+    -- Create fifth tab collections
+    local tab5, pane_left = window:spawn_tab({ cwd = code_collection_dir })
+    tab5:set_title("collections")
+
+    -- Split RIGHT of the LEFT pane
+    local pane_right_top = pane_left:split({
+      direction = "Right",
+      size = 0.5,
+      cwd =  code_collection_dir,
+    })
+
+    -- Split DOWN inside the RIGHT pane
+    pane_right_top:split({
+      direction = "Bottom",
+      size = 0.5,
+      cwd =  code_collection_dir,
+    })
+  else
     -- Create fifth tab: 3Screens
     local tab5, pane_left = window:spawn_tab({ cwd = home })
     tab5:set_title("3Screens")
@@ -61,6 +81,7 @@ function M.setup_tabs()
       size = 0.5,
       cwd = home,
     })
+  end
 
     -- Focus the first tab
     window:gui_window():perform_action(
