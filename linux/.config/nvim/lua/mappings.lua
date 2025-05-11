@@ -7,7 +7,7 @@ require "nvchad.mappings"
 vim.keymap.del("n", "<leader>e")
 local map = vim.keymap.set
 -- custom nvim open
-map("n", "\\", "<cmd>NvimTreeFocus<CR>", { desc = "Toggle NvimTree" })
+map("n", "\\", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle NvimTree" })
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")

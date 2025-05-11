@@ -87,5 +87,15 @@ return {
     Lazy = false,
     dependencies = { "nvim-lua/plenary.nvim" },
     opts = {}
+  },
+  {
+    "nvim-tree/nvim-tree.lua",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      -- require("nvchad.configs.nvimtree").defaults()
+      require("configs.nvimtree").setup()
+    end,
   }
+
+
 }
