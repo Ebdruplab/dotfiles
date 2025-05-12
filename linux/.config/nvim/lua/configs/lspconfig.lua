@@ -7,19 +7,19 @@ local lspconfig = require("lspconfig")
 -- non custom
 require("nvchad.configs.lspconfig").defaults()
 
-local servers = { 
-    "html",
-    "cssls",
-    'bash-language-server',
-    'shellcheck',
-    'lua-language-server',
-    'stylua', 
-    'vim-language-server',
-    'json-to-struct',
-    'ansible-language-server',
-    'ansible-lint',
-    'terraformls',
-    'jq'
+local servers = {
+  "html",
+  "cssls",
+  'bash-language-server',
+  'shellcheck',
+  'lua-language-server',
+  'stylua',
+  'vim-language-server',
+  'json-to-struct',
+  'ansible-language-server',
+  'ansible-lint',
+  'terraformls',
+  'jq'
 }
 
 vim.lsp.enable(servers)
@@ -38,4 +38,3 @@ lspconfig.ansiblels.setup {
     },
   },
 }
-
