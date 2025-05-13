@@ -48,18 +48,41 @@ alias gfp='git fetch --prune'
 # --------------------------
 alias resource='if [ "$SHELL" = "/bin/bash" ]; then source ~/.bash_profile; elif [ "$SHELL" = "/bin/zsh" ]; then source $HOME/.zshrc; fi'
 
-# ls command aliases
+# ls and fzf command aliases
 # ------------------
 alias ll='ls -alhZ'
-alias llr='ls -alhr'
-alias lls='ls -alhS'
-alias llsr='ls -alhSr'
-alias lld='ls -alht'
-alias lldr='ls -alhtr'
-alias lldc='ls -alhtU'
-alias lldcr='ls -alhtUr'
+# eza! https://the.eza.website/
+if hash eza 2>/dev/null; then
+  alias ls='eza'                                                          # ls
+  alias l='eza -lbF --git'                                                # list, size, type, git
+  alias ll='eza -lbGF --git'                                             # long list
+  alias llm='eza -lbGd --git --sort=modified'                            # long list, modified date sort
+  alias la='eza -lbhHigUmuSa --time-style=long-iso --git --color-scale'  # all list
+  alias lx='eza -lbhHigUmuSa@ --time-style=long-iso --git --color-scale' # all + extended list
+  # specialty views
+  alias lS='eza -1'                                                              # one column, just names
+  alias lt='eza --tree --level=2'                                         # tree
+else
+    alias llr='ls -alhr'
+    alias lls='ls -alhS'
+    alias llsr='ls -alhSr'
+    alias lld='ls -alht'
+    alias lldr='ls -alhtr'
+    alias lldc='ls -alhtU'
+    alias lldcr='ls -alhtUr'
+fi
 alias ctree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 
+
+# Create a preview command!
+# https://remysharp.com/2018/08/23/cli-improved#fzf--ctrlr
+if hash fzf 2>/dev/null; then
+    if hash bat 2>/dev/null; then
+        alias preview="fzf --preview 'bat --color \"always\" {}'"
+    else
+        alias preview="fzf --preview 'cat {}'"
+    fi
+fi
 # JSON prettifier alias
 # ---------------------
 alias json='python -m json.tool'
