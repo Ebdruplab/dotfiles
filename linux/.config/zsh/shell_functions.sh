@@ -316,7 +316,7 @@ function largest_files() {
 }
 
 # Function on date manipulation
-edb_sp() {
+ebd_sp() {
   # 1) Ensure exactly two args were passed
   if (( $# != 2 )); then
     echo "Usage: edb_sp <from> <to>"
