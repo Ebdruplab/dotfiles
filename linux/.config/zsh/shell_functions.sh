@@ -315,3 +315,60 @@ function largest_files() {
     fi
 }
 
+# Function on date manipulation
+edb_sp() {
+  # 1) Ensure exactly two args were passed
+  if (( $# != 2 )); then
+    echo "Usage: edb_sp <from> <to>"
+    return 1
+  fi
+
+  local from=$1             # the string to search for
+  local to=$2               # the string to replace it with
+  local files file ans      # arrays & loop vars
+  local sed_args            # will hold our sed “-i” flags
+
+  # 2) Detect GNU vs BSD/macOS sed in-place syntax
+  if sed --version &>/dev/null; then
+    # GNU sed
+    sed_args=(-i)
+  else
+    # BSD/macOS sed
+    sed_args=(-i '')
+  fi
+
+  # 3) Build an array of all matching filenames:
+  #    - grep -RIl: recursive, ignore binaries, list filenames only
+  #    - the ${(f)…} flag in zsh splits the command output on newlines
+  files=(${(f)"$(grep -RIl -- "$from" .)"})
+
+  # 4) If no files found, nothing to do
+  if (( ${#files} == 0 )); then
+    echo "No occurrences of '$from' found."
+    return 0
+  fi
+
+  # 5) Loop over each file, show context, and prompt
+  for file in $files; do
+    echo
+    echo "===== $file ====="
+    # 5a) Show 3 lines BEFORE each match, with line numbers
+    grep -n -B3 -- "$from" "$file"
+    echo
+    # 5b) Prompt the user (y/N)
+    printf "Replace all '%s' → '%s' in %s? [y/N] " "$from" "$to" "$file"
+    read -r ans
+
+    # 5c) On “y” or “Y”, perform the in-place replacement
+    if [[ $ans =~ ^[Yy]$ ]]; then
+      sed "${sed_args[@]}" "s|$from|$to|g" "$file"
+      echo "  ✓ updated $file"
+    else
+      echo "  – skipped $file"
+    fi
+  done
+
+  echo
+  echo "All done."
+}
+
