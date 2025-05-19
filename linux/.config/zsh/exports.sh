@@ -18,3 +18,18 @@ if command -v fabric &>/dev/null; then
     export DEFAULT_MODEL="phi3:mini"
     export OPENAI_BASE_URL=http://localhost:11434/api
 fi
+
+# batcat export
+if command -v bat &>/dev/null; then
+    export BAT_THEME="Catppuccin Mocha"
+    alias bat='batcat'
+fi
+
+# thefuck
+if command -v thefuck &>/dev/null; then
+  eval $(thefuck --alias)
+  eval $(thefuck --alias fk)
+
+fi
+
+
