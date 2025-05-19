@@ -315,17 +315,20 @@ function largest_files() {
     fi
 }
 
-# Function on date manipulation
+# ebd_sp: search-and-replace across files, with per-file confirmation
+#
+# Usage: ebd_sp <from> <to>
+#
 ebd_sp() {
   # 1) Ensure exactly two args were passed
   if (( $# != 2 )); then
-    echo "Usage: edb_sp <from> <to>"
+    echo "Usage: ebd_sp <from> <to>"
     return 1
   fi
 
   local from=$1             # the string to search for
   local to=$2               # the string to replace it with
-  local files file ans      # arrays & loop vars
+  local files=() file ans   # array & loop vars
   local sed_args            # will hold our sed “-i” flags
 
   # 2) Detect GNU vs BSD/macOS sed in-place syntax
@@ -339,17 +342,18 @@ ebd_sp() {
 
   # 3) Build an array of all matching filenames:
   #    - grep -RIl: recursive, ignore binaries, list filenames only
-  #    - the ${(f)…} flag in zsh splits the command output on newlines
-  files=(${(f)"$(grep -RIl -- "$from" .)"})
+  #    - readarray/mapfile splits on newlines into the 'files' array
+  if ! files=( ); then :; fi  # ensure array exists even if grep fails
+  readarray -t files < <(grep -RIl -- "$from" .)
 
   # 4) If no files found, nothing to do
-  if (( ${#files} == 0 )); then
+  if (( ${#files[@]} == 0 )); then
     echo "No occurrences of '$from' found."
     return 0
   fi
 
   # 5) Loop over each file, show context, and prompt
-  for file in $files; do
+  for file in "${files[@]}"; do
     echo
     echo "===== $file ====="
     # 5a) Show 3 lines BEFORE each match, with line numbers
@@ -371,4 +375,32 @@ ebd_sp() {
   echo
   echo "All done."
 }
+
+# If yazi is installed, define 'y' to run it and auto-cd into its --cwd result
+if command -v yazi &>/dev/null; then
+  y() {
+    # create a temp file to capture yazi's desired cwd
+    local tmp
+    tmp="$(mktemp -t "yazi-cwd.XXXXXX")" || {
+      echo "Failed to create temp file" >&2
+      return 1
+    }
+
+    # run yazi, passing through all args and telling it to write cwd to $tmp
+    yazi "$@" --cwd-file="$tmp"
+    local cwd
+
+    # read the entire temp-file into $cwd (handles spaces/newlines)
+    # -r: raw; -d '' reads until NUL (EOF)
+    IFS= read -r -d '' cwd < "$tmp" || true
+
+    # if $cwd non-empty and differs from current dir, cd into it
+    if [[ -n "$cwd" && "$cwd" != "$PWD" ]]; then
+      builtin cd -- "$cwd"
+    fi
+
+    # clean up
+    rm -f -- "$tmp"
+  }
+fi
 

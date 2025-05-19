@@ -1,0 +1,6 @@
+[flavor]
+# use Catppuccin Mocha for both dark & light modes
+## ya pack -a yazi-rs/flavors:catppuccin-mocha
+dark  = "catppuccin-mocha"
+light = "catppuccin-mocha"
+
