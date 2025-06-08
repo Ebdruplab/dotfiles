@@ -44,5 +44,11 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 vim.opt.number = true
 vim.opt.relativenumber = true
 
--- local o = vim.o
+local o = vim.o
+
+-- Indenting
+o.shiftwidth = 4
+o.tabstop = 4
+o.softtabstop = 4
+
 -- o.cursorlineopt ='both' -- to enable cursorline!
