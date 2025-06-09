@@ -25,6 +25,10 @@ return {
   		ensure_installed = {
    			"vim", "lua", "vimdoc", "xml", "ssh_config", "json",
         "html", "css", "comment", "powershell", "bash",
+<<<<<<< HEAD
+=======
+        "python", "markdown", "toml", "luadoc",
+>>>>>>> 8d3c6a5fdd5b0fc8794fdf7fffc75caf5c2be4c4
   	},
    	},
   },
@@ -57,7 +61,11 @@ return {
             [[                                                                       ]],
             [[                                                                       ]],
         }
-
+        -- Set the section
+        dashboard.section.header.opts.hl = "AlphaHeader"
+        
+        -- Set the color
+        vim.api.nvim_set_hl(0, "AlphaHeader", { fg = "#CBA6F7", bg = "NONE", bold = true })
         alpha.setup(dashboard.opts)
     end,
   },

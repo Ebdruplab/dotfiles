@@ -1,0 +1,18 @@
+# /etc/systemd/system/kanata.service
+[Unit]
+Description=Kanata keyboard remapper
+Documentation=https://github.com/jtroo/kanata
+After=graphical-session.target
+
+[Service]
+# make sure kanata’s on PATH (adjust if you installed it elsewhere)
+Environment=PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/home/kristian/.cargo/bin
+Environment=DISPLAY=:0
+Environment=HOME=/home/kristian
+Type=simple
+ExecStart=/home/kristian/.cargo/bin/kanata --cfg /home/kristian/.config/kanata/config.kbd
+Restart=no
+
+[Install]
+WantedBy=default.target
+
