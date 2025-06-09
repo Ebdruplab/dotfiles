@@ -1,8 +1,9 @@
 return {
   {
     "stevearc/conform.nvim",
-    -- event = 'BufWritePre', -- uncomment for format on save
+    event = 'BufWritePre',
     opts = require "configs.conform",
+    lazy = false,
   },
 
   -- These are some examples, uncomment them if you want to see them work!
@@ -23,7 +24,7 @@ return {
   	opts = {
   		ensure_installed = {
    			"vim", "lua", "vimdoc", "xml", "ssh_config", "json",
-        "html", "css", "comment", "powershell", "bash", 
+        "html", "css", "comment", "powershell", "bash",
   	},
    	},
   },
