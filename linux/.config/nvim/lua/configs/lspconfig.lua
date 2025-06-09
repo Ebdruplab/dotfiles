@@ -35,6 +35,17 @@ lspconfig.ansiblels.setup {
       python = {
         interpreterPath = "python3",
       },
+      validation = {
+        enabled = true,
+      },
+      completion = {
+        provideRedirectModules = true,
+        provideModuleOptionAliases = true,
+      },
+      diagnostics = {
+        enabled = true,
+      },
     },
   },
 }
+
