@@ -29,11 +29,11 @@ vim.lsp.enable(servers)
 lspconfig.ansiblels.setup {
   on_attach = on_attach,
   capabilities = capabilities,
-  filetypes = { "yaml.ansible", "yaml" },
+  filetypes = { "yaml.ansible" },
   settings = {
     ansible = {
       python = {
-        interpreterPath = "python3", -- Or your venv/bin/python path
+        interpreterPath = "python3",
       },
     },
   },
