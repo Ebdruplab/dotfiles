@@ -1,4 +1,5 @@
 -- ~/.config/nvim/lua/plugins/conform.lua
+local ansible_lint_should_fix_all = true  -- or false
 
 local ansible_lint_fixes = {
   -- [1] Fix uses of command module instead of shell
@@ -27,7 +28,13 @@ local ansible_lint_fixes = {
   "yaml",
 }
 
--- local ansible_lint_fixes = { "fqcn", "yaml" } -- Example: minimal config
+local ansible_lint_fixed
+
+if ansible_lint_should_fix_all then
+  ansible_lint_fixed = { "all" }
+else
+  ansible_lint_fixed = ansible_lint_fixes
+end
 
 local options = {
   formatters_by_ft = {
@@ -47,7 +54,7 @@ local options = {
     ["ansible-lint"] = {
       command = "ansible-lint",
       args = function(ctx)
-        local fix_list = table.concat(ansible_lint_fixes, ",")
+        local fix_list = table.concat(ansible_lint_fixed, ",")
         return { "--fix=" .. fix_list, "--nocolor", ctx.filename }
       end,
       stdin = false,
