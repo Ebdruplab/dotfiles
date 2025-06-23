@@ -19,5 +19,6 @@ return {
   macos_window_background_blur = 20,
   max_fps = 120,
   prefer_egl = true,
+  audible_bell = "Disabled",
 }
 
