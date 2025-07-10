@@ -93,6 +93,10 @@ alias pssh='ssh -l "$($SSH_USER)" -o PreferredAuthentications=password -o Pubkey
 alias pbcopy='xsel --clipboard --input'
 alias pbpaste='xsel --clipboard --output'
 
+# Tools aliases
+# --------------
+alias ebd_list_crontab='for user in $(cut -f1 -d: /etc/passwd); do crontab -u $user -l; done'
+
 # Enable color support for ls and add handy aliases
 # -------------------------------------------------
 if [ -x /usr/bin/dircolors ]; then

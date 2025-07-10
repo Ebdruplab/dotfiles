@@ -1,0 +1,9 @@
+ls
+lscpu 
+lscpu | totable
+lscpu | to md 
+lscpu | to list
+ls
+table 
+batcat inventories/patch_inventories/prd/prd_ansible_tue_4th_12.ini
+exit
