@@ -408,3 +408,119 @@ if command -v yazi &>/dev/null; then
   }
 fi
 
+# SSH SOCKS5 tunnel manager (toggle / up / down / help) ===
+ebd_tunnel() {
+    local LOCAL_PORT=9999
+
+    # Colors
+    local RED="\033[0;31m"
+    local GREEN="\033[1;92m"
+    local CYAN="\033[1;36m"
+    local NC="\033[0m" # reset
+
+    # Bastion connection details from environment
+    local BASTION="${CUSTOM_SSH_USER}@${CUSTOM_SSH_JUMPSRV}"
+
+    # Verify required env vars
+    if [[ -z "$CUSTOM_SSH_USER" || -z "$CUSTOM_SSH_JUMPSRV" ]]; then
+        echo -e "${RED}Missing required CUSTOM_SSH_* environment variables.${NC}"
+        echo "Please export:"
+        echo "  CUSTOM_SSH_USER     (e.g. someuser)"
+        echo "  CUSTOM_SSH_JUMPSRV  (e.g. bastion.example.com)"
+        return 1
+    fi
+
+    # Get PID if tunnel is currently running
+    local PID
+    PID=$(pgrep -f "ssh -f -N -D ${LOCAL_PORT} ${BASTION}")
+
+    # --- Helper: Start tunnel ---
+    start_tunnel() {
+        if [ -n "$PID" ]; then
+            echo -e "${RED}Tunnel already running on port ${LOCAL_PORT} (PID: $PID).${NC}"
+            return 1
+        fi
+
+        echo -e "${CYAN}Starting SSH SOCKS5 tunnel on localhost:${LOCAL_PORT} → ${BASTION}${NC}"
+        ssh -f -N -C -D ${LOCAL_PORT} "${BASTION}"
+
+        sleep 1
+        if pgrep -f "ssh -f -N -D ${LOCAL_PORT} ${BASTION}" >/dev/null; then
+            echo -e "${GREEN}Tunnel is up.${NC}"
+        else
+            echo -e "${RED}Failed to start tunnel.${NC}"
+        fi
+    }
+
+    # --- Helper: Stop tunnel ---
+    stop_tunnel() {
+        if [ -z "$PID" ]; then
+            echo -e "${RED}No tunnel running on port ${LOCAL_PORT}.${NC}"
+            return 1
+        fi
+
+        echo -e "${CYAN}Stopping tunnel on port ${LOCAL_PORT} (PID: $PID)...${NC}"
+        kill "$PID" >/dev/null 2>&1
+
+        sleep 1
+        if pgrep -f "ssh -f -N -D ${LOCAL_PORT} ${BASTION}" >/dev/null; then
+            echo -e "${RED}Failed to stop tunnel.${NC}"
+        else
+            echo -e "${GREEN}Tunnel stopped.${NC}"
+        fi
+    }
+
+    # --- Helper: Show help ---
+    show_help() {
+        echo -e "${CYAN}ebd_tunnel — SSH SOCKS5 tunnel manager for internal browsing${NC}"
+        echo
+        echo -e "This function sets up or tears down an SSH SOCKS5 proxy tunnel"
+        echo -e "through your configured bastion (${GREEN}${BASTION}${NC}) using port ${GREEN}${LOCAL_PORT}${NC}."
+        echo
+        echo -e "${CYAN}Usage:${NC}"
+        echo -e "  ebd_tunnel up        Start the tunnel"
+        echo -e "  ebd_tunnel down      Stop the tunnel"
+        echo -e "  ebd_tunnel           Toggle tunnel (start if down, stop if up)"
+        echo -e "  ebd_tunnel help      Show this help"
+        echo
+        echo -e "${CYAN}Environment variables used:${NC}"
+        echo "  CUSTOM_SSH_USER      SSH user for bastion"
+        echo "  CUSTOM_SSH_JUMPSRV   Bastion hostname"
+        echo
+        echo -e "${CYAN}Example setup:${NC}"
+        echo "  export CUSTOM_SSH_USER=someuser"
+        echo "  export CUSTOM_SSH_JUMPSRV=bastion.example.com"
+        echo "  ebd_tunnel up"
+        echo
+        echo -e "${CYAN}Once up:${NC}"
+        echo "  - Configure your browser to use SOCKS5 proxy 127.0.0.1:${LOCAL_PORT}"
+        echo "  - Or test with:"
+        echo "    curl --socks5-hostname 127.0.0.1:${LOCAL_PORT} https://internal.example.com/"
+    }
+
+    # --- Argument parsing ---
+    case "$1" in
+        up)
+            start_tunnel
+            ;;
+        down)
+            stop_tunnel
+            ;;
+        help)
+            show_help
+            ;;
+        "")
+            # Toggle mode
+            if [ -n "$PID" ]; then
+                stop_tunnel
+            else
+                start_tunnel
+            fi
+            ;;
+        *)
+            echo -e "${RED}Unknown command: '$1'${NC}"
+            echo "Try: ebd_tunnel help"
+            ;;
+    esac
+}
+
