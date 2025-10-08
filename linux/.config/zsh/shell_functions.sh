@@ -407,7 +407,6 @@ if command -v yazi &>/dev/null; then
     rm -f -- "$tmp"
   }
 fi
-
 # SSH SOCKS5 tunnel manager (toggle / up / down / help) ===
 ebd_tunnel() {
     local LOCAL_PORT=9999
@@ -430,43 +429,70 @@ ebd_tunnel() {
         return 1
     fi
 
-    # Get PID if tunnel is currently running
-    local PID
-    PID=$(pgrep -f "ssh -f -N -D ${LOCAL_PORT} ${BASTION}")
+    # --- Helper: find current PID(s) for the tunnel ---
+    find_pids() {
+        # flexible pattern: ssh ... -D <port> ... <bastion>
+        # (works even if flags are reordered/combined, e.g., -fNTC)
+        local pids
+        pids=$(pgrep -f "ssh.*-D[[:space:]]*(${LOCAL_PORT}|127\.0\.0\.1:${LOCAL_PORT}).*${BASTION}" || true)
+
+        # lsof fallback (useful on macOS)
+        if [[ -z "$pids" ]] && command -v lsof >/dev/null 2>&1; then
+            # find ssh listening on our local port
+            pids=$(lsof -nP -iTCP:$(printf "%q" "$LOCAL_PORT") -sTCP:LISTEN 2>/dev/null \
+                | awk '/ssh/ {print $2}' | sort -u)
+        fi
+
+        echo "$pids"
+    }
 
     # --- Helper: Start tunnel ---
     start_tunnel() {
-        if [ -n "$PID" ]; then
-            echo -e "${RED}Tunnel already running on port ${LOCAL_PORT} (PID: $PID).${NC}"
+        local pids
+        pids="$(find_pids)"
+        if [[ -n "$pids" ]]; then
+            echo -e "${RED}Tunnel already running on port ${LOCAL_PORT} (PID(s): ${pids}).${NC}"
             return 1
         fi
 
-        echo -e "${CYAN}Starting SSH SOCKS5 tunnel on localhost:${LOCAL_PORT} → ${BASTION}${NC}"
-        ssh -f -N -C -D ${LOCAL_PORT} "${BASTION}"
+        echo -e "${CYAN}Starting SSH SOCKS5 tunnel on 127.0.0.1:${LOCAL_PORT} → ${BASTION}${NC}"
+        # -f background, -N no command, -C compression, -D dynamic, bind to localhost explicitly
+        ssh -f -N -C -D 127.0.0.1:${LOCAL_PORT} "${BASTION}" 2>/dev/null
 
         sleep 1
-        if pgrep -f "ssh -f -N -D ${LOCAL_PORT} ${BASTION}" >/dev/null; then
-            echo -e "${GREEN}Tunnel is up.${NC}"
+        pids="$(find_pids)"
+        if [[ -n "$pids" ]]; then
+            echo -e "${GREEN}Tunnel is up (PID(s): ${pids}).${NC}"
         else
             echo -e "${RED}Failed to start tunnel.${NC}"
+            return 1
         fi
     }
 
     # --- Helper: Stop tunnel ---
     stop_tunnel() {
-        if [ -z "$PID" ]; then
+        local pids
+        pids="$(find_pids)"
+        if [[ -z "$pids" ]]; then
             echo -e "${RED}No tunnel running on port ${LOCAL_PORT}.${NC}"
             return 1
         fi
 
-        echo -e "${CYAN}Stopping tunnel on port ${LOCAL_PORT} (PID: $PID)...${NC}"
-        kill "$PID" >/dev/null 2>&1
+        echo -e "${CYAN}Stopping tunnel on port ${LOCAL_PORT} (PID(s): ${pids})...${NC}"
+        # Prefer pkill with the same flexible pattern
+        if command -v pkill >/dev/null 2>&1; then
+            pkill -f "ssh.*-D[[:space:]]*(${LOCAL_PORT}|127\.0\.0\.1:${LOCAL_PORT}).*${BASTION}" >/dev/null 2>&1 || true
+        else
+            # Fallback: kill exact PIDs
+            kill $pids >/dev/null 2>&1 || true
+        fi
 
         sleep 1
-        if pgrep -f "ssh -f -N -D ${LOCAL_PORT} ${BASTION}" >/dev/null; then
+        if [[ -n "$(find_pids)" ]]; then
             echo -e "${RED}Failed to stop tunnel.${NC}"
+            return 1
         else
-            echo -e "${GREEN}Tunnel stopped.${NC}"
+            echo -e "${GREEN}Tunnel stopped.${GREEN}"
         fi
     }
 
@@ -500,18 +526,12 @@ ebd_tunnel() {
 
     # --- Argument parsing ---
     case "$1" in
-        up)
-            start_tunnel
-            ;;
-        down)
-            stop_tunnel
-            ;;
-        help)
-            show_help
-            ;;
+        up)    start_tunnel ;;
+        down)  stop_tunnel ;;
+        help)  show_help ;;
         "")
             # Toggle mode
-            if [ -n "$PID" ]; then
+            if [[ -n "$(find_pids)" ]]; then
                 stop_tunnel
             else
                 start_tunnel
