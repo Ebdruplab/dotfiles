@@ -49,3 +49,14 @@ lspconfig.ansiblels.setup {
   },
 }
 
+-- Make docker-compose templates use the docker-compose YAML filetype
+vim.filetype.add({
+  pattern = {
+    -- matches any path ending with docker-compose.homelab.yml.j2
+    [".*/docker%-compose%.homelab%.yml%.j2"] = "yaml.docker-compose",
+
+    -- optional: match any docker-compose*.yml.j2
+    [".*/docker%-compose.*%.yml%.j2"] = "yaml.docker-compose",
+    [".*/docker%-compose.*%.yaml%.j2"] = "yaml.docker-compose",
+  },
+})
