@@ -1,6 +1,3 @@
-[include]
-    path = ~/.config/private-dotfiles/.gitconfig/.gitconfig-ebdruplab
-
 [includeIf "gitdir:~/git/work/"]
     path = ~/.config/private-dotfiles/.gitconfig/.gitconfig-work
 
