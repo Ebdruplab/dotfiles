@@ -51,3 +51,17 @@ else
   echo "Linked $INPUTRC_SOURCE → $INPUTRC_TARGET"
 fi
 
+# Link SSH allowed_signers
+SSH_DIR="$HOME/.ssh"
+mkdir -p "$SSH_DIR"
+chmod 700 "$SSH_DIR"
+
+ALLOWED_SIGNERS_SOURCE="$SCRIPT_DIR/.ssh/allowed_signers"
+ALLOWED_SIGNERS_TARGET="$SSH_DIR/allowed_signers"
+
+if [ -e "$ALLOWED_SIGNERS_SOURCE" ]; then
+  link_if_missing "$ALLOWED_SIGNERS_SOURCE" "$ALLOWED_SIGNERS_TARGET"
+  chmod 600 "$ALLOWED_SIGNERS_TARGET"
+else
+  echo "Skipping missing $ALLOWED_SIGNERS_SOURCE"
+fi
