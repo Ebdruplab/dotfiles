@@ -146,6 +146,11 @@ export STARSHIP_CONFIG=$HOME/.config/starship/starship.toml
 
 eval "$(starship init zsh)"
 
+
+# SSH Configuration
+# -----------------
+
+## This is handling ssh agent on WSL instance so no forwarding
 # Define SSH keys
 SSH_KEYS=(
   "id_github"
@@ -158,14 +163,49 @@ SSH_KEYS=(
   #"id_wsl_home"
 )
 
-# SSH Configuration
-# -----------------
 # Starting ssh-agent and adding the keys
-eval $(ssh-agent) >/dev/null
-for key in "${SSH_KEYS[@]}"; do
-  key_path="$HOME/.ssh/$key"
-  [ -f "$key_path" ] && /bin/ssh-add "$key_path" >/dev/null
-done
+ eval $(ssh-agent) >/dev/null
+ for key in "${SSH_KEYS[@]}"; do
+   key_path="$HOME/.ssh/$key"
+   [ -f "$key_path" ] && /bin/ssh-add "$key_path" >/dev/null
+ done
+
+# Override section for Bitwarden agent forwarding
+# ------------------------------------------------
+# WSL -> Windows Bitwarden/OpenSSH agent bridge
+# WSL -> Windows SSH agent bridge for Bitwarden/OpenSSH
+export WIN_USER="${WIN_USER:-$USER}"
+export NPIPERELAY_EXE="/mnt/c/Users/${WIN_USER}/AppData/Local/Microsoft/WinGet/Packages/albertony.npiperelay_Microsoft.Winget.Source_8wekyb3d8bbwe/npiperelay.exe"
+export SSH_AUTH_SOCK="$HOME/.ssh/agent.sock"
+
+bw_ssh_agent_start() {
+  mkdir -p "$HOME/.ssh"
+
+  # Required tools
+  command -v socat >/dev/null 2>&1 || return 0
+  [ -x "$NPIPERELAY_EXE" ] || return 0
+
+  # Optional: detect Bitwarden CLI
+  if command -v bw >/dev/null 2>&1; then
+    export BW_AVAILABLE=1
+  else
+    export BW_AVAILABLE=0
+  fi
+
+  # If socket exists and works, keep it
+  if [ -S "$SSH_AUTH_SOCK" ] && ssh-add -L >/dev/null 2>&1; then
+    return 0
+  fi
+
+  # Clean up stale bridge/socket
+  pkill -f "socat.*${SSH_AUTH_SOCK}" >/dev/null 2>&1 || true
+  rm -f "$SSH_AUTH_SOCK"
+
+  # Start bridge
+  setsid socat UNIX-LISTEN:"$SSH_AUTH_SOCK",fork EXEC:"$NPIPERELAY_EXE -ei -s //./pipe/openssh-ssh-agent",nofork >/tmp/socat-ssh-agent.log 2>&1 &
+}
+
+bw_ssh_agent_start
 
 # OPEN TUX
 # --------

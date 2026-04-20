@@ -3,3 +3,5 @@
 
 [includeIf "gitdir:~/git/ebdruplab/"]
     path = ~/.config/private-dotfiles/.gitconfig/.gitconfig-ebdruplab
+[gpg "ssh"]
+	program = ssh-keygen.exe
